@@ -74,11 +74,11 @@
                     <!-- Tid og træk -->
                     <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" 
                                 Margin="6,10,0,0">
-                        <TextBlock Text="Tid: " FontWeight="Bold"
+                        <TextBlock Text="Time: " FontWeight="Bold"
                                    Foreground="GhostWhite"/>
                         <TextBlock Text="{Binding GameTime}" Margin="5,0"
                                    Foreground="GhostWhite"/>
-                        <TextBlock Text="Træk: " FontWeight="Bold" Margin="20,0,0,0"
+                        <TextBlock Text="Move: " FontWeight="Bold" Margin="20,0,0,0"
                                    Foreground="GhostWhite"/>
                         <TextBlock Text="{Binding MoveCount}" Margin="5,0"
                                    Foreground="GhostWhite"/>
