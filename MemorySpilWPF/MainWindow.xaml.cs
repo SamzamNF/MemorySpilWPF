@@ -20,7 +20,7 @@ namespace MemorySpilWPF
         public MainWindow()
         {
             InitializeComponent();
-            MainWindowViewModel vm = new MainWindowViewModel();
+            GameViewModel vm = new GameViewModel();
             DataContext = vm;
         }
     }

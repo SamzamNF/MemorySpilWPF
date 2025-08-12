@@ -5,8 +5,112 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MemorySpilWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize">
+    <Border CornerRadius="0.5" BorderThickness="1" Background="#87CEFA" Opacity="0.98">
+        <Border.BorderBrush>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="LightSkyBlue" Offset="0.9"/>
+                <GradientStop Color="#A95656" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
 
-    </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="630"/>
+            </Grid.ColumnDefinitions>
+            
+            
+            <!-- Kort grid som generer vendespillet -->
+            <ItemsControl Grid.Column="1" ItemsSource="{Binding Cards}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="4" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding DataContext.FlipCardCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                            CommandParameter="{Binding}"
+                            Margin="5"
+                            FontSize="32"
+                            Width="105" Height="105"
+                            Background="{Binding IsMatched, Converter={StaticResource BoolToBrushConverter}}"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            BorderThickness="0"
+                            BorderBrush="Transparent">
+                            <ContentControl>
+                                <ContentControl.Style>
+                                    <Style TargetType="ContentControl">
+                                        <Setter Property="Content" Value="❓"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsFlipped}" Value="True">
+                                                <Setter Property="Content" Value="{Binding Symbol}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ContentControl.Style>
+                            </ContentControl>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            
+            <!-- Sidepanel med spillernavn & knapper -->
+            <Border Grid.Column="0" CornerRadius="2" Background="#1E3A8A"
+                    Opacity="1" Margin="1">
+
+                <StackPanel>
+                    <!-- Spillernavn -->
+                    <TextBlock Text="Player name:" Foreground="GhostWhite" FontWeight="Bold"
+                               Margin="6, 10, 0 ,5"/>
+                    <TextBox Text="{Binding PlayerName, UpdateSourceTrigger=PropertyChanged}"
+                             Height="25" FontSize="14" Margin="0.5" Width="140"
+                             Padding="2"/>
+                    
+                    <!-- Tid og træk -->
+                    <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Left" 
+                                Margin="6,10,0,0">
+                        <TextBlock Text="Tid: " FontWeight="Bold"
+                                   Foreground="GhostWhite"/>
+                        <TextBlock Text="{Binding GameTime}" Margin="5,0"
+                                   Foreground="GhostWhite"/>
+                        <TextBlock Text="Træk: " FontWeight="Bold" Margin="20,0,0,0"
+                                   Foreground="GhostWhite"/>
+                        <TextBlock Text="{Binding MoveCount}" Margin="5,0"
+                                   Foreground="GhostWhite"/>
+                    </StackPanel>
+                    
+                    <!-- Knapper til gemme, starte og søge -->
+                    <StackPanel Margin="0,220">
+                        <Button Content="New Game"
+                                Foreground="GhostWhite"
+                                Background="#87CEFA"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                BorderThickness="0"
+                                Margin="6,10"
+                                Height="30"
+                                Command="{Binding NewGameCommand}"/>
+                        <!-- Knapper til gemme, starte og søge -->
+                        <Button Content="Save Game"
+                                Foreground="GhostWhite"
+                                Background="#87CEFA"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                BorderThickness="0"
+                                Margin="6,10"
+                                Height="30"
+                                Command="{Binding SaveStatsCommand}"/>
+                    </StackPanel>
+
+                </StackPanel>
+                
+            </Border>
+            
+        </Grid>
+    </Border>
 </Window>

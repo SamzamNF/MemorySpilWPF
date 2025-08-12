@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-internal class ViewModelBase : INotifyPropertyChanged
+public class ViewModelBase : INotifyPropertyChanged
 {
     //Interface fra "PropertyChange"
     public event PropertyChangedEventHandler? PropertyChanged;

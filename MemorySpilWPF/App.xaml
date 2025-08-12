@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:MemorySpilWPF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <local:BoolToBrushConverter x:Key="BoolToBrushConverter"
+                                TrueBrush="LightGreen"
+                                FalseBrush="White"/>
     </Application.Resources>
 </Application>
